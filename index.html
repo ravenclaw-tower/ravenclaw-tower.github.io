@@ -294,6 +294,100 @@
             }
         }
 
+        /* Стили для секции отчета */
+        .report-section {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .report-title {
+            font-family: 'Romul', serif;
+            color: #BA9868;
+            font-weight: normal;
+            margin-bottom: 20px;
+            font-size: 125%;
+            line-height: 116%;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .report-title:hover {
+            color: #d4b98c;
+        }
+
+        .code-area {
+            background: #1a2d4a;
+            border: 1px solid #BA9868;
+            border-radius: 2px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+            display: none;
+        }
+
+        .code-text {
+            color: #CCCCCC;
+            font-family: monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            word-break: break-all;
+            margin-bottom: 15px;
+            min-height: 60px;
+        }
+
+        .highlight {
+            background-color: #2c3e50;
+            color: #BA9868;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .highlight:hover {
+            background-color: #3a5068;
+        }
+
+        .editable-input {
+            background-color: #2c3e50;
+            color: #ffcc00;
+            border: 1px solid #BA9868;
+            border-radius: 3px;
+            padding: 2px 4px;
+            font-family: monospace;
+            font-size: 14px;
+            width: 300px;
+            max-width: 100%;
+        }
+
+        .report-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .report-button {
+            background: #23385A;
+            color: #EBCEA7;
+            border: solid;
+            border-color: #404A5B;
+            padding: 8px 16px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-weight: normal;
+            transition: background 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .report-button:hover {
+            background: #a88658;
+        }
+
         /* Адаптивность для контента */
         @media (max-width: 800px) {
             .game-title {
@@ -314,6 +408,11 @@
             .drawn-card {
                 width: 200px;
                 height: 280px;
+            }
+
+            .report-buttons {
+                flex-direction: column;
+                align-items: center;
             }
         }
 
@@ -416,8 +515,6 @@
                 font-size: 11px;
             }
         }
-
-        /* Остальные медиа-запросы остаются без изменений */
     </style>
 </head>
 <body>
@@ -458,10 +555,24 @@
                 
                 <div class="game-area">
                     <div class="card-deck" onclick="drawCard()">
-                        <img src="https://i.ibb.co/sd9Z8Qzq/3.png" alt="Колода карт">
+                        <img src="https://i.ibb.co/sd9Z8Qzq/3.png" alt="Колда карт">
                     </div>
                     
                     <div class="cards-display" id="cardsDisplay"></div>
+                </div>
+
+                <!-- Новая секция для отправки отчета -->
+                <div class="report-section">
+                    <h2 class="report-title" onclick="toggleReportCode()">ОТПРАВИТЬ ОТЧЕТ</h2>
+                    
+                    <div class="code-area" id="codeArea">
+                        <div class="code-text" id="reportCode"></div>
+                    </div>
+                    
+                    <div class="report-buttons" id="reportButtons">
+                        <button class="report-button" onclick="copyCode()">Копировать код</button>
+                        <a href="#" class="report-button" id="reportLink" target="_blank">Отправить отчет</a>
+                    </div>
                 </div>
 
                 <h2 class="game-subtitle">ПРАВИЛА ИГРЫ</h2>
@@ -476,11 +587,21 @@
             </div>
 
             <script>
+                // Массив карт с URL и именами
                 const cards = [
-                    'https://i.ibb.co/tMccjTs6/image.jpg',
-                    'https://i.ibb.co/xtNWfqLP/image.jpg'
-                    // Добавьте сюда больше URL карт
+                    { 
+                        url: 'https://i.ibb.co/tMccjTs6/image.jpg', 
+                        name: 'Гефест Ханнем' 
+                    },
+                    { 
+                        url: 'https://i.ibb.co/xtNWfqLP/image.jpg', 
+                        name: 'Блейк Эллингтон' 
+                    }
+                    // Добавьте сюда больше карт с URL и именами
                 ];
+
+                let currentCard = null;
+                let userReportLink = "Accio, ссылка на отчет!";
 
                 function drawCard() {
                     const display = document.getElementById('cardsDisplay');
@@ -490,13 +611,113 @@
                     
                     // Выбираем случайную карту
                     const randomCard = cards[Math.floor(Math.random() * cards.length)];
+                    currentCard = randomCard;
                     
                     // Создаем элемент карты
                     const cardElement = document.createElement('div');
                     cardElement.className = 'drawn-card';
-                    cardElement.innerHTML = `<img src="${randomCard}" alt="Карта игры">`;
+                    cardElement.innerHTML = `<img src="${randomCard.url}" alt="Карта игры">`;
                     
                     display.appendChild(cardElement);
+                    
+                    // Обновляем код для копирования
+                    updateReportCode();
+                    
+                    // Обновляем ссылку для отправки отчета
+                    updateReportLink();
+                }
+
+                function toggleReportCode() {
+                    const codeArea = document.getElementById('codeArea');
+                    const reportButtons = document.getElementById('reportButtons');
+                    
+                    if (codeArea.style.display === 'none' || codeArea.style.display === '') {
+                        codeArea.style.display = 'block';
+                        reportButtons.style.display = 'flex';
+                        updateReportCode();
+                        updateReportLink();
+                    } else {
+                        codeArea.style.display = 'none';
+                        reportButtons.style.display = 'none';
+                    }
+                }
+
+                function updateReportCode() {
+                    if (!currentCard) {
+                        document.getElementById('reportCode').innerHTML = 'Сначала вытяните карту';
+                        return;
+                    }
+                    
+                    const reportCode = document.getElementById('reportCode');
+                    const code = `[width=200][img]${currentCard.url}[/img][/width]\n\n[url=<span class="highlight" onclick="editLink()" id="editableLink">${userReportLink}</span>]Отчет по заданию: ${currentCard.name}[/url]`;
+                    reportCode.innerHTML = code;
+                }
+
+                function editLink() {
+                    const editableLink = document.getElementById('editableLink');
+                    const currentText = editableLink.textContent;
+                    
+                    // Создаем поле ввода
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = currentText;
+                    input.className = 'editable-input';
+                    input.id = 'linkInput';
+                    
+                    // Заменяем span на input
+                    editableLink.parentNode.replaceChild(input, editableLink);
+                    
+                    // Фокусируем и выделяем текст
+                    input.focus();
+                    input.select();
+                    
+                    // Обработчики событий для сохранения
+                    input.addEventListener('blur', saveLink);
+                    input.addEventListener('keypress', function(e) {
+                        if (e.key === 'Enter') {
+                            saveLink();
+                        }
+                    });
+                }
+
+                function saveLink() {
+                    const input = document.getElementById('linkInput');
+                    if (input) {
+                        userReportLink = input.value;
+                        updateReportCode();
+                    }
+                }
+
+                function updateReportLink() {
+                    if (!currentCard) return;
+                    
+                    const reportLink = document.getElementById('reportLink');
+                    // Замените URL на нужный вам форум
+                    reportLink.href = `https://ваш-форум.ru/new-report?card=${encodeURIComponent(currentCard.name)}`;
+                }
+
+                function copyCode() {
+                    if (!currentCard) {
+                        alert('Сначала вытяните карту');
+                        return;
+                    }
+                    
+                    const plainCode = `[width=200][img]${currentCard.url}[/img][/width]\n\n[url=${userReportLink}]Отчет по заданию: ${currentCard.name}[/url]`;
+                    
+                    const textArea = document.createElement('textarea');
+                    textArea.value = plainCode;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    // Визуальное подтверждение копирования
+                    const button = event.target;
+                    const originalText = button.textContent;
+                    button.textContent = 'Скопировано!';
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                    }, 2000);
                 }
             </script>
         </div>
