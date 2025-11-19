@@ -13,10 +13,14 @@
             box-sizing: border-box;
         }
 
-        @font-face {
-            font-family: 'Romul';
-            src: url('https://fonts.cdnfonts.com/s/15665/Romul.woff') format('woff');
-        }
+	    @font-face {
+	        font-family: 'Romul';
+	        src: url('./fonts/Romul.woff2') format('woff2'),
+	             url('./fonts/Romul.woff') format('woff');
+	        font-weight: normal;
+	        font-style: normal;
+	        font-display: swap;
+	    }
 
         body {
             background-image: url('https://i.ibb.co/NdgH4fjQ/7.png');
