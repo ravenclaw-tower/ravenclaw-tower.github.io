@@ -184,49 +184,16 @@
             color: var(--color-text);
         }
 
-        .game-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
         .game-title {
             font-family: 'Romul', serif;
             color: var(--color-primary);
             font-weight: normal;
-            margin-bottom: 0;
+            text-align: center;
+            margin-bottom: 20px;
             font-size: clamp(24px, 5vw, 150%);
             line-height: 1.16;
             letter-spacing: 3px;
             margin-top: 5px;
-        }
-
-        .raven-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: transform var(--transition-speed);
-            margin-top: 10px;
-        }
-
-        .raven-container:hover {
-            transform: scale(1.05);
-        }
-
-        .raven-icon {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-        }
-
-        .raven-tooltip {
-            font-size: 12px;
-            color: var(--color-text);
-            max-width: 200px;
-            line-height: 1.3;
         }
 
         .game-subtitle {
@@ -337,21 +304,59 @@
             text-align: center;
         }
 
+        .report-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
         .report-title {
             font-family: 'Romul', serif;
             color: var(--color-primary);
             font-weight: normal;
-            margin-bottom: 20px;
+            margin-bottom: 0;
             font-size: 125%;
             line-height: 1.16;
             letter-spacing: 2px;
             cursor: pointer;
             transition: color var(--transition-speed);
             user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .report-title:hover {
             color: #d4b98c;
+        }
+
+        .raven-title {
+            font-family: 'Romul', serif;
+            color: var(--color-primary);
+            font-weight: normal;
+            margin-bottom: 0;
+            font-size: 125%;
+            line-height: 1.16;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: color var(--transition-speed);
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .raven-title:hover {
+            color: #d4b98c;
+        }
+
+        .raven-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
         }
 
         .code-area {
@@ -436,18 +441,14 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
+            display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity var(--transition-speed), visibility var(--transition-speed);
         }
 
         .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
+            display: flex;
         }
 
         .modal-content {
@@ -459,6 +460,7 @@
             width: 90%;
             position: relative;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            text-align: center;
         }
 
         .modal-close {
@@ -477,18 +479,23 @@
             justify-content: center;
         }
 
+        .modal-raven {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
         .modal-title {
             font-family: 'Romul', serif;
             color: var(--color-primary);
             font-size: 20px;
             margin-bottom: 15px;
-            text-align: center;
         }
 
         .modal-task {
             color: var(--color-text);
             line-height: 1.6;
-            text-align: center;
         }
 
         /* Адаптивность */
@@ -511,14 +518,6 @@
             .banner-wrapper { margin-bottom: 15px; }
             .content { padding: 20px 30px 30px; }
             .breadcrumb { padding: 6px 16px; font-size: 11px; }
-            .game-header {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-            .raven-container {
-                margin-top: 15px;
-            }
         }
 
         @media (max-width: 800px) {
@@ -531,6 +530,10 @@
             .drawn-card {
                 width: 200px;
                 height: 280px;
+            }
+            .report-header {
+                flex-direction: column;
+                gap: 15px;
             }
             .report-buttons {
                 flex-direction: column;
@@ -545,10 +548,6 @@
             .drawn-card {
                 width: 180px;
                 height: 252px;
-            }
-            .raven-tooltip {
-                max-width: 150px;
-                font-size: 11px;
             }
         }
 
@@ -620,16 +619,7 @@
             </nav>
 
             <main class="content">
-                <div class="game-header">
-                    <h2 class="game-title">Игра "Я никогда не..."</h2>
-                    <div class="raven-container" id="ravenContainer">
-                        <img src="./img/raven1.png" 
-                             alt="Сварливая ворона" 
-                             class="raven-icon" 
-                             id="ravenIcon">
-                        <span class="raven-tooltip">Я не вижу задания!</span>
-                    </div>
-                </div>
+                <h2 class="game-title">Игра "Я никогда не..."</h2>
                 
                 <div class="game-area">
                     <div class="card-deck" 
@@ -653,15 +643,28 @@
                 </div>
 
                 <section class="report-section">
-                    <h3 class="report-title" 
-                        onclick="gameController.toggleReportCode()"
-                        role="button"
-                        tabindex="0"
-                        aria-expanded="false"
-                        aria-controls="codeArea"
-                        onkeypress="if(event.key==='Enter'||event.key===' ')gameController.toggleReportCode()">
-                        ОТПРАВИТЬ ОТЧЕТ <i class="fas fa-feather-alt"></i>
-                    </h3>
+                    <div class="report-header">
+                        <h3 class="report-title" 
+                            onclick="gameController.toggleReportCode()"
+                            role="button"
+                            tabindex="0"
+                            aria-expanded="false"
+                            aria-controls="codeArea"
+                            onkeypress="if(event.key==='Enter'||event.key===' ')gameController.toggleReportCode()">
+                            ОТПРАВИТЬ ОТЧЕТ <i class="fas fa-feather-alt"></i>
+                        </h3>
+                        
+                        <h3 class="raven-title" 
+                            id="ravenTitle"
+                            role="button"
+                            tabindex="0"
+                            aria-expanded="false"
+                            aria-controls="modalOverlay">
+                            НЕ ВИЖУ ЗАДАНИЯ <img src="./img/raven1.png" 
+                                 alt="Сварливая ворона" 
+                                 class="raven-icon">
+                        </h3>
+                    </div>
                     
                     <div class="code-area" id="codeArea" role="region" aria-label="Код для копирования">
                         <div class="code-text" id="reportCode"></div>
@@ -700,6 +703,7 @@
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
+            <img src="./img/raven2.png" alt="Кричащая ворона" class="modal-raven">
             <h3 class="modal-title" id="modalTitle"></h3>
             <p class="modal-task" id="modalTask"></p>
         </div>
@@ -890,8 +894,7 @@
                 reportButtons: null,
                 reportLink: null,
                 reportTitle: null,
-                ravenContainer: null,
-                ravenIcon: null,
+                ravenTitle: null,
                 modalOverlay: null,
                 modalClose: null,
                 modalTitle: null,
@@ -906,15 +909,20 @@
                 elements.reportButtons = document.getElementById('reportButtons');
                 elements.reportLink = document.getElementById('reportLink');
                 elements.reportTitle = document.querySelector('.report-title');
-                elements.ravenContainer = document.getElementById('ravenContainer');
-                elements.ravenIcon = document.getElementById('ravenIcon');
+                elements.ravenTitle = document.getElementById('ravenTitle');
                 elements.modalOverlay = document.getElementById('modalOverlay');
                 elements.modalClose = document.getElementById('modalClose');
                 elements.modalTitle = document.getElementById('modalTitle');
                 elements.modalTask = document.getElementById('modalTask');
 
                 // Добавляем обработчики событий для ворона
-                elements.ravenContainer.addEventListener('click', toggleModal);
+                elements.ravenTitle.addEventListener('click', toggleModal);
+                elements.ravenTitle.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        toggleModal();
+                    }
+                });
+                
                 elements.modalClose.addEventListener('click', closeModal);
                 elements.modalOverlay.addEventListener('click', (e) => {
                     if (e.target === elements.modalOverlay) {
@@ -989,21 +997,25 @@
                 elements.modalTitle.textContent = currentCard.name;
                 elements.modalTask.textContent = currentCard.task;
                 elements.modalOverlay.classList.add('active');
-                elements.ravenIcon.src = './img/raven2.png';
                 isModalOpen = true;
                 
                 // Блокируем прокрутку фона
                 document.body.style.overflow = 'hidden';
+                
+                // Обновляем ARIA атрибуты
+                elements.ravenTitle.setAttribute('aria-expanded', 'true');
             };
 
             // Закрыть модальное окно
             const closeModal = () => {
                 elements.modalOverlay.classList.remove('active');
-                elements.ravenIcon.src = './img/raven1.png';
                 isModalOpen = false;
                 
                 // Восстанавливаем прокрутку фона
                 document.body.style.overflow = '';
+                
+                // Обновляем ARIA атрибуты
+                elements.ravenTitle.setAttribute('aria-expanded', 'false');
             };
 
             // Переключить видимость кода
@@ -1124,6 +1136,7 @@
             return {
                 drawCard,
                 toggleReportCode,
+                toggleModal,
                 editLink,
                 copyCode
             };
