@@ -496,6 +496,47 @@
         .modal-task {
             color: var(--color-text);
             line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Стили для рекламных баннеров */
+        .ads-section {
+            margin: 100px 0 0;
+            text-align: center;
+        }
+
+        .ads-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .ad-banner {
+            width: 120px;
+            height: auto;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: transform var(--transition-speed) ease;
+            object-fit: contain;
+            background-color: transparent;
+            position: relative;
+        }
+
+        .ad-banner:hover {
+            transform: scale(1.05);
+        }
+
+        .ad-banner:active {
+            transform: scale(0.98);
+        }
+
+        /* Стили для точек между рекламными баннерами */
+        .ad-dot {
+            color: var(--color-primary);
+            font-size: 18px;
+            margin: 0 5px;
         }
 
         /* Адаптивность */
@@ -539,6 +580,13 @@
                 flex-direction: column;
                 align-items: center;
             }
+            .ads-container {
+                gap: 15px;
+            }
+            /* Скрываем точки на мобильных устройствах */
+            .ad-dot {
+                display: none;
+            }
         }
 
         @media (max-width: 500px) {
@@ -548,6 +596,9 @@
             .drawn-card {
                 width: 180px;
                 height: 252px;
+            }
+            .ads-container {
+                gap: 10px;
             }
         }
 
@@ -695,6 +746,42 @@
                     <li>Правило четвертое</li>
                     <li>Правило пятое</li>
                 </ol>
+
+                <!-- Рекламный раздел -->
+                <section class="ads-section">
+                    <div class="ads-container">
+                        <img src="https://i.postimg.cc/c6GNLrqN/advert1.png" 
+                             alt="Корм для гиппогрифов - дешево" 
+                             class="ad-banner"
+                             onclick="adsController.showAd1()"
+                             role="button"
+                             tabindex="0"
+                             aria-label="Реклама: Корм для гиппогрифов - дешево"
+                             onkeypress="if(event.key==='Enter'||event.key===' ')adsController.showAd1()">
+                        
+                        <span class="ad-dot">●</span>
+                        
+                        <img src="https://i.postimg.cc/jCYrSLVR/advert2.png" 
+                             alt="Зачистка от нюхлеров - быстро" 
+                             class="ad-banner"
+                             onclick="adsController.showAd2()"
+                             role="button"
+                             tabindex="0"
+                             aria-label="Реклама: Зачистка от нюхлеров - быстро"
+                             onkeypress="if(event.key==='Enter'||event.key===' ')adsController.showAd2()">
+                        
+                        <span class="ad-dot">●</span>
+                        
+                        <img src="https://i.postimg.cc/kGbmCWps/advert3.png" 
+                             alt="Дружба с лукотрусом - бесценно" 
+                             class="ad-banner"
+                             onclick="adsController.showAd3()"
+                             role="button"
+                             tabindex="0"
+                             aria-label="Реклама: Дружба с лукотрусом - бесценно"
+                             onkeypress="if(event.key==='Enter'||event.key===' ')adsController.showAd3()">
+                    </div>
+                </section>
             </main>
         </div>
     </div>
@@ -709,8 +796,44 @@
         </div>
     </div>
 
+    <!-- Модальное окно для рекламы 1 -->
+    <div class="modal-overlay" id="adModal1">
+        <div class="modal-content">
+            <button class="modal-close" onclick="adsController.closeAd1()">&times;</button>
+            <img src="./img/raven2.png" alt="Кричащая ворона" class="modal-raven">
+            <h3 class="modal-title">Корм для гиппогрифов</h3>
+            <p class="modal-task">У вас же даже гиппогрифа нет. Зачем вы сюда нажимаете?</p>
+        </div>
+    </div>
+
+    <!-- Модальное окно для рекламы 2 -->
+    <div class="modal-overlay" id="adModal2">
+        <div class="modal-content">
+            <button class="modal-close" onclick="adsController.closeAd2()">&times;</button>
+            <img src="./img/raven2.png" alt="Кричащая ворона" class="modal-raven">
+            <h3 class="modal-title">Зачистка от нюхлеров</h3>
+            <p class="modal-task">Грозный Глаз был бы в восторге от вашей бдительности. Хватит переходить по таким ссылкам</p>
+        </div>
+    </div>
+
+    <!-- Модальное окно для рекламы 3 -->
+    <div class="modal-overlay" id="adModal3">
+        <div class="modal-content">
+            <button class="modal-close" onclick="adsController.closeAd3()">&times;</button>
+            <img src="./img/raven2.png" alt="Кричащая ворона" class="modal-raven">
+            <h3 class="modal-title">Дружба с лукотрусом</h3>
+            <p class="modal-task">Отличный день для прогулки по роще</p>
+            <a href="https://rave.dhog.org/viewtopic.php?t=1184" 
+               class="report-button" 
+               target="_blank"
+               rel="noopener noreferrer">
+                Посетить Рощу
+            </a>
+        </div>
+    </div>
+
     <script>
-        // Оптимизированный игровой контроллер
+         // Оптимизированный игровой контроллер
         const gameController = (() => {
             // Приватные переменные
             const cards = [
@@ -1139,6 +1262,112 @@
                 toggleModal,
                 editLink,
                 copyCode
+            };
+        })();
+
+        // Контроллер для рекламы
+        const adsController = (() => {
+            const adModal1 = document.getElementById('adModal1');
+            const adModal2 = document.getElementById('adModal2');
+            const adModal3 = document.getElementById('adModal3');
+            
+            const showAd1 = () => {
+                if (adModal1) {
+                    adModal1.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            };
+            
+            const showAd2 = () => {
+                if (adModal2) {
+                    adModal2.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            };
+            
+            const showAd3 = () => {
+                if (adModal3) {
+                    adModal3.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            };
+            
+            const closeAd1 = () => {
+                if (adModal1) {
+                    adModal1.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            };
+            
+            const closeAd2 = () => {
+                if (adModal2) {
+                    adModal2.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            };
+            
+            const closeAd3 = () => {
+                if (adModal3) {
+                    adModal3.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            };
+            
+            // Закрытие по клику вне контента и по ESC
+            const init = () => {
+                if (adModal1) {
+                    adModal1.addEventListener('click', (e) => {
+                        if (e.target === adModal1) {
+                            closeAd1();
+                        }
+                    });
+                }
+                
+                if (adModal2) {
+                    adModal2.addEventListener('click', (e) => {
+                        if (e.target === adModal2) {
+                            closeAd2();
+                        }
+                    });
+                }
+                
+                if (adModal3) {
+                    adModal3.addEventListener('click', (e) => {
+                        if (e.target === adModal3) {
+                            closeAd3();
+                        }
+                    });
+                }
+                
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        if (adModal1 && adModal1.classList.contains('active')) {
+                            closeAd1();
+                        }
+                        if (adModal2 && adModal2.classList.contains('active')) {
+                            closeAd2();
+                        }
+                        if (adModal3 && adModal3.classList.contains('active')) {
+                            closeAd3();
+                        }
+                    }
+                });
+            };
+            
+            // Инициализация при загрузке DOM
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+            
+            return {
+                showAd1,
+                showAd2,
+                showAd3,
+                closeAd1,
+                closeAd2,
+                closeAd3
             };
         })();
 
