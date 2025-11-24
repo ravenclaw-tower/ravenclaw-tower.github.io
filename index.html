@@ -572,16 +572,19 @@
                 width: 200px;
                 height: 280px;
             }
-			.report-header {
-				flex-direction: column;
-				gap: 30px;
-			}
+            .report-header {
+                flex-direction: column;
+                gap: 30px;
+            }
             .report-buttons {
                 flex-direction: column;
                 align-items: center;
             }
             .ads-container {
-                gap: 15px;
+                gap: 10px;
+            }
+            .ad-banner {
+                width: 80px; /* Уменьшены для мобильных устройств */
             }
             /* Скрываем точки на мобильных устройствах */
             .ad-dot {
@@ -598,7 +601,10 @@
                 height: 252px;
             }
             .ads-container {
-                gap: 10px;
+                gap: 8px;
+            }
+            .ad-banner {
+                width: 70px; /* Еще меньше на очень маленьких экранах */
             }
         }
 
@@ -812,7 +818,7 @@
             <button class="modal-close" onclick="adsController.closeAd2()">&times;</button>
             <img src="./img/raven2.png" alt="Кричащая ворона" class="modal-raven">
             <h3 class="modal-title">Зачистка от нюхлеров</h3>
-            <p class="modal-task">Грозный Глаз был бы в восторге от вашей "бдительности". Хватит переходить по таким ссылкам</p>
+            <p class="modal-task">Грозный Глаз был бы в восторге от вашей бдительности. Хватит переходить по таким ссылкам</p>
         </div>
     </div>
 
@@ -833,7 +839,7 @@
     </div>
 
     <script>
-         // Оптимизированный игровой контроллер
+        // Оптимизированный игровой контроллер
         const gameController = (() => {
             // Приватные переменные
             const cards = [
