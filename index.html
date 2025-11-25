@@ -748,9 +748,9 @@
                 <ol class="rules-list">
                     <li>Нажимаете на колоду — вытягиваете карту с заданием.</li>
                     <li>Не зашло задание? Ничего страшного. Жмёте ещё раз и меняете карту.</li>
-                    <li>Запоминаете “имя карты”. Если память решила уйти на каникулы — запишите, сделайте скрин, воспользуйтесь формой для отправки отчета.</li>
+                    <li>Запоминаете "имя карты". Если память решила уйти на каникулы — запишите, сделайте скрин, воспользуйтесь формой для отправки отчета.</li>
                     <li>Выполняете задание в нужной локации: будь то дифирамбы, кабинет преподавателя или любая свободная тема, если задание не требует конкретного места. (Например, мозгошмыги можно сдавать прямо в теме отчёта.)</li>
-                    <li>Приносите отчёт в тему: с самим заданием или ссылкой на него. Обязательно указывайте “имя карты”.</li>
+                    <li>Приносите отчёт в тему: с самим заданием или ссылкой на него. Обязательно указывайте "имя карты".</li>
                     <li>Готовы к следующему вызову — берите новую карту. Повторно выполнять уже выполненное вами же задание нельзя. Ну, технически можно… но зачтётся всё равно один раз.</li>
                     <li>И главное — наслаждайтесь процессом.</li>
                 </ol>
@@ -788,6 +788,17 @@
                              tabindex="0"
                              aria-label="Реклама: Дружба с лукотрусом - бесценно"
                              onkeypress="if(event.key==='Enter'||event.key===' ')adsController.showAd3()">
+                        
+                        <span class="ad-dot">●</span>
+                        
+                        <img src="img/advert4.png" 
+                             alt="Запись на RAVENBRO - + ВАЙБ" 
+                             class="ad-banner"
+                             onclick="adsController.showAd4()"
+                             role="button"
+                             tabindex="0"
+                             aria-label="Реклама: Запись на RAVENBRO - + ВАЙБ"
+                             onkeypress="if(event.key==='Enter'||event.key===' ')adsController.showAd4()">
                     </div>
                 </section>
             </main>
@@ -836,6 +847,22 @@
                target="_blank"
                rel="noopener noreferrer">
                 Посетить Рощу
+            </a>
+        </div>
+    </div>
+
+    <!-- Модальное окно для рекламы 4 -->
+    <div class="modal-overlay" id="adModal4">
+        <div class="modal-content">
+            <button class="modal-close" onclick="adsController.closeAd4()">&times;</button>
+            <img src="./img/raven2.png" alt="Кричащая ворона" class="modal-raven">
+            <h3 class="modal-title">Запись на RAVENBRO: +ВАЙБ</h3>
+            <p class="modal-task">Пластинки крутятся, слава мутится</p>
+            <a href="https://rave.dhog.org/viewforum.php?f=111" 
+               class="report-button" 
+               target="_blank"
+               rel="noopener noreferrer">
+                Заглянуть в студию
             </a>
         </div>
     </div>
@@ -893,7 +920,7 @@
                 { 
                     url: './img/Эрик Смит.jpg', 
                     name: 'Эрик Смит',
-                    task: 'Я никогда не писал стихов, где рифмуются «орёл» и «умён»'
+                    task: 'Я никогда не писал стихов, где рифмуются "орёл" и "умён"'
                 },
                 { 
                     url: './img/Эйриан Гамильтон.jpg', 
@@ -1278,6 +1305,7 @@
             const adModal1 = document.getElementById('adModal1');
             const adModal2 = document.getElementById('adModal2');
             const adModal3 = document.getElementById('adModal3');
+            const adModal4 = document.getElementById('adModal4');
             
             const showAd1 = () => {
                 if (adModal1) {
@@ -1300,6 +1328,13 @@
                 }
             };
             
+            const showAd4 = () => {
+                if (adModal4) {
+                    adModal4.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            };
+            
             const closeAd1 = () => {
                 if (adModal1) {
                     adModal1.classList.remove('active');
@@ -1317,6 +1352,13 @@
             const closeAd3 = () => {
                 if (adModal3) {
                     adModal3.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            };
+            
+            const closeAd4 = () => {
+                if (adModal4) {
+                    adModal4.classList.remove('active');
                     document.body.style.overflow = '';
                 }
             };
@@ -1347,6 +1389,14 @@
                     });
                 }
                 
+                if (adModal4) {
+                    adModal4.addEventListener('click', (e) => {
+                        if (e.target === adModal4) {
+                            closeAd4();
+                        }
+                    });
+                }
+                
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape') {
                         if (adModal1 && adModal1.classList.contains('active')) {
@@ -1357,6 +1407,9 @@
                         }
                         if (adModal3 && adModal3.classList.contains('active')) {
                             closeAd3();
+                        }
+                        if (adModal4 && adModal4.classList.contains('active')) {
+                            closeAd4();
                         }
                     }
                 });
@@ -1373,9 +1426,11 @@
                 showAd1,
                 showAd2,
                 showAd3,
+                showAd4,
                 closeAd1,
                 closeAd2,
-                closeAd3
+                closeAd3,
+                closeAd4
             };
         })();
 
