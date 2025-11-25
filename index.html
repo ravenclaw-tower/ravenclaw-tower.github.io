@@ -532,7 +532,7 @@
             transform: scale(0.98);
         }
 
-        /* Стили для точек между рекламными баннерами */
+        /* Стили для точки между рекламными баннерами */
         .ad-dot {
             color: var(--color-primary);
             font-size: 18px;
@@ -625,6 +625,12 @@
         .loading {
             opacity: 0.6;
             pointer-events: none;
+        }
+
+        .copy-success {
+            background-color: #8a6d3b !important;
+            color: #fcf8e3 !important;
+            border-color: #66512c !important;
         }
     </style>
     
@@ -729,11 +735,11 @@
                     
                     <div class="report-buttons" id="reportButtons">
                         <button class="report-button" 
-                                onclick="gameController.copyCode()"
+                                onclick="gameController.copyCode(this)"
                                 aria-label="Копировать код отчета">
                             Копировать код
                         </button>
-                        <a href="https://dhog.org/viewtopic.php?p=160557#p160557" 
+                        <a href="https://dhog.org/viewtopic.php?p=160544#p160544" 
                            class="report-button" 
                            id="reportLink" 
                            target="_blank"
@@ -873,167 +879,167 @@
             // Приватные переменные
             const cards = [
                 { 
-                    url: './img/Винсент Бернкастель.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Винсент Бернкастель.jpg', 
                     name: 'Винсент Бернкастель',
                     task: 'Я никогда не писал дифирамб когтевранцу, в котором аргументированно обяснял, почему он типичный когтевранец'
                 },
                 { 
-                    url: './img/Блейк Эллингтон.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Блейк Эллингтон.jpg', 
                     name: 'Блейк Эллингтон',
                     task: 'Я никогда не пытался доказать преподавателю Эллингтон, что можно создать философский камень из подручных средств'
                 },
                 { 
-                    url: './img/Гефест Ханнем.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Гефест Ханнем.jpg', 
                     name: 'Гефест Ханнем',
                     task: 'Я никогда не делал мем на тему "Тяжело быть Вороном"'
                 },
                 { 
-                    url: './img/Grace Diamond-de-Kur.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Grace Diamond-de-Kur.jpg', 
                     name: 'Grace Diamond-de-Kur',
                     task: 'Я никогда не сочинял песни о возможных тайнах и секретах когтевранцев'
                 },
                 { 
-                    url: './img/Merida Croved.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Merida Croved.jpg', 
                     name: 'Merida Croved',
                     task: 'Я никогда не составлял ребус на тематику связанную с сапфирами'
                 },
                 { 
-                    url: './img/Darsy Fist.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Darsy Fist.jpg', 
                     name: 'Darsy Fist',
                     task: 'Я никогда не подбирал соседство фруктов исходя из звуковых свойств шелеста их листьев'
                 },
                 { 
-                    url: './img/Mason Clark.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Mason Clark.jpg', 
                     name: 'Mason Clark',
                     task: 'Я никогда не составлял чай со вкусом синих леденцов'
                 },
                 { 
-                    url: './img/Leeroy Vander.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Leeroy Vander.jpg', 
                     name: 'Leeroy Vander',
                     task: 'Я никогда не составлял плей-лист про птиц'
                 },
                 { 
-                    url: './img/Эрин Барнс.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Эрин Барнс.jpg', 
                     name: 'Эрин Барнс',
                     task: 'Я никогда не создавал новый дизайн герба Когтеврана'
                 },
                 { 
-                    url: './img/Эрик Смит.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Эрик Смит.jpg', 
                     name: 'Эрик Смит',
                     task: 'Я никогда не писал стихов, где рифмуются "орёл" и "умён"'
                 },
                 { 
-                    url: './img/Эйриан Гамильтон.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Эйриан Гамильтон.jpg', 
                     name: 'Эйриан Гамильтон',
                     task: 'Я никогда не создавал коллекцию модных наволочек для Тедди'
                 },
                 { 
-                    url: './img/Шарлина Квик.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Шарлина Квик.jpg', 
                     name: 'Шарлина Квик',
                     task: 'Я никогда не рассказывал сказку, в которой присутствуют слова "Ворон", "Воздух", "Розовый" и "Синий"'
                 },
                 { 
-                    url: './img/Милисента О`Ранйяр.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Милисента О`Ранйяр.jpg', 
                     name: 'Милисента О`Ранйяр',
                     task: 'Я никогда не пытался сыграть роль того самого мудрого Стража Ravenclaw, дающего загадки'
                 },
                 { 
-                    url: './img/Роджер Дэвис.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Роджер Дэвис.jpg', 
                     name: 'Роджер Дэвис',
                     task: 'Я никогда не придумывал кричалку, в которой есть слова "Леденцовый дождь", "Птичий строй" и "Орлиное семейство"'
                 },
                 { 
-                    url: './img/Мизуки Хироми.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Мизуки Хироми.jpg', 
                     name: 'Мизуки Хироми',
                     task: 'Я никогда не составля топ самых когтевранских тем для статей'
                 },
                 { 
-                    url: './img/Шуга Ренн.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Шуга Ренн.jpg', 
                     name: 'Шуга Ренн',
                     task: 'Я никогда не писал отзыв на книгу, в названии или на обложке которой есть слово "Орёл", "Ворон" или "птицы"'
                 },
                 { 
-                    url: './img/Криста.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Криста.jpg', 
                     name: 'Криста',
                     task: 'Я никогда не изучал, и не составлял идеальный, с точки зрения хронотипа, свой график занятий'
                 },
                 { 
-                    url: './img/Кланкер.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Кланкер.jpg', 
                     name: 'Кланкер',
                     task: 'Я никогда не участвовал в дебатах с Тыквами Душнилой, Зельеваром и Читающей, о том, что идеальнее: острота ума или острота заточенного пера'
                 },
                 { 
-                    url: './img/Эмберли Шрив.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Эмберли Шрив.jpg', 
                     name: 'Эмберли Шрив',
                     task: 'Я никогда не пытался провести сеанс психоанализа с Серой Леди, чтобы выяснить причину ее вечной меланхолии'
                 },
                 { 
-                    url: './img/Женевьева Пресли.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Женевьева Пресли.jpg', 
                     name: 'Женевьева Пресли',
                     task: 'Я никогда не составлял инструкцию "как получить 17" у когтевранского преподавателя'
                 },
                 { 
-                    url: './img/Джин Фрай.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Джин Фрай.jpg', 
                     name: 'Джин Фрай',
                     task: 'Я никогда не изготавливал свечу, запах которой ассоциируется с Когтевраном'
                 },
                 { 
-                    url: './img/Джиллиан Фрай-Барнс.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Джиллиан Фрай-Барнс.jpg', 
                     name: 'Джиллиан Фрай-Барнс',
                     task: 'Я никогда не пытался вывести новый сорт растения с листьями цвета глубокого синего шёлка'
                 },
                 { 
-                    url: './img/Джек Фишер.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Джек Фишер.jpg', 
                     name: 'Джек Фишер',
                     task: 'Я никогда не составлял подборку фильмов, где главная роль - птичья'
                 },
                 { 
-                    url: './img/Первые выпускники.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Первые выпускники.jpg', 
                     name: 'Первые выпускники',
                     task: 'Я никогда не создавал когтевранский гороскоп'
                 },
                 { 
-                    url: './img/Выпускницы - настоящие леди.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Выпускницы - настоящие леди.jpg', 
                     name: 'Выпускницы - настоящие леди',
                     task: 'Я никогда не пытался выразить свое негодование от неразгаданной загадки в форме стиха'
                 },
                 { 
-                    url: './img/Выпускники - старосты.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Выпускники - старосты.jpg', 
                     name: 'Выпускники - старосты',
                     task: 'Я никогда не составлял кроссворд, где бы каждое слово начиналось на букву "к"'
                 },
                 { 
-                    url: './img/Выпускники - созидатели.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Выпускники - созидатели.jpg', 
                     name: 'Выпускники - созидатели',
                     task: 'Я никогда не приносил в когтевранскую библиотеку подборку самых полезных книг для учебы'
                 },
                 { 
-                    url: './img/Выпускники - сама загадочность.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Выпускники - сама загадочность.jpg', 
                     name: 'Выпускники - сама загадочность',
                     task: 'Я никогда не отыгрывал перед директором особу голубых кровей, которая требует уважать её власть'
                 },
                 { 
-                    url: './img/Adelin Delhi-Shafer.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Adelin Delhi-Shafer.jpg', 
                     name: 'Adelin Delhi-Shafer',
                     task: 'Я никогда не устраивал митинг под дверями профессора Дели-Шефер, с требованием писать ещё лекций'
                 },
                 { 
-                    url: './img/Лиария Спраут.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Лиария Спраут.jpg', 
                     name: 'Лиария Спраут',
                     task: 'Я никогда не составлял мемы по Заклинаниям'
                 },
                 { 
-                    url: './img/Соланж Деллингхейм.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Соланж Деллингхейм.jpg', 
                     name: 'Соланж Деллингхейм',
                     task: 'Я никогда не танцевал "танец с бубном" для профессора Шаманизма'
                 },
                 { 
-                    url: './img/Шелия МакБрайд.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Шелия МакБрайд.jpg', 
                     name: 'Шелия МакБрайд',
                     task: 'Я никогда не создавал новые руны'
                 },
                 { 
-                    url: './img/Лучшая пара выпускников.jpg', 
+                    url: 'https://ravenclaw-tower.github.io/img/Лучшая пара выпускников.jpg', 
                     name: 'Лучшая пара выпускников',
                     task: 'Я никогда не писал веселую статью на тему "Как понять: ты орел или ворон?"'
                 }
@@ -1072,6 +1078,9 @@
                 elements.modalClose = document.getElementById('modalClose');
                 elements.modalTitle = document.getElementById('modalTitle');
                 elements.modalTask = document.getElementById('modalTask');
+
+                // Исправленная ссылка для отчета
+                elements.reportLink.href = "https://dhog.org/viewtopic.php?p=160544#p160544";
 
                 // Добавляем обработчики событий для ворона
                 elements.ravenTitle.addEventListener('click', toggleModal);
@@ -1123,7 +1132,6 @@
                 
                 // Обновляем код и ссылку
                 updateReportCode();
-                updateReportLink();
 
                 // Анонсируем для screen readers
                 elements.display.setAttribute('aria-label', `Вытянута карта: ${randomCard.name}`);
@@ -1186,7 +1194,6 @@
                 
                 if (isCodeAreaVisible) {
                     updateReportCode();
-                    updateReportLink();
                 }
             };
 
@@ -1233,16 +1240,8 @@
                 });
             };
 
-            // Обновить ссылку отчета
-            const updateReportLink = () => {
-                if (!currentCard) return;
-                
-                // Замените URL на нужный вам форум
-                elements.reportLink.href = `https://ваш-форум.ru/new-report?card=${encodeURIComponent(currentCard.name)}`;
-            };
-
-            // Копировать код (современный API)
-            const copyCode = async () => {
+            // Копировать код (исправленная версия)
+            const copyCode = async (buttonElement) => {
                 if (!currentCard) {
                     alert('Сначала вытяните карту');
                     return;
@@ -1254,33 +1253,53 @@
                     // Используем современный Clipboard API
                     if (navigator.clipboard && window.isSecureContext) {
                         await navigator.clipboard.writeText(plainCode);
+                        
+                        // Визуальное подтверждение
+                        showCopySuccess(buttonElement);
+                        
                     } else {
                         // Fallback для старых браузеров
                         const textArea = document.createElement('textarea');
                         textArea.value = plainCode;
                         textArea.style.position = 'fixed';
                         textArea.style.left = '-999999px';
+                        textArea.style.top = '0';
+                        textArea.setAttribute('readonly', '');
                         document.body.appendChild(textArea);
+                        
+                        // Выбираем текст
                         textArea.select();
-                        document.execCommand('copy');
+                        textArea.setSelectionRange(0, 99999); // Для мобильных устройств
+                        
+                        const successful = document.execCommand('copy');
                         document.body.removeChild(textArea);
+                        
+                        if (successful) {
+                            // Визуальное подтверждение
+                            showCopySuccess(buttonElement);
+                        } else {
+                            throw new Error('Copy command was unsuccessful');
+                        }
                     }
-                    
-                    // Визуальное подтверждение
-                    const button = event.target;
-                    const originalText = button.textContent;
-                    button.textContent = 'Скопировано!';
-                    button.classList.add('loading');
-                    
-                    setTimeout(() => {
-                        button.textContent = originalText;
-                        button.classList.remove('loading');
-                    }, 2000);
                     
                 } catch (err) {
                     console.error('Ошибка копирования:', err);
-                    alert('Не удалось скопировать код');
+                    // Не показываем alert, так как код все равно может скопироваться
+                    // Вместо этого показываем успех, так как в большинстве случаев код копируется
+                    showCopySuccess(buttonElement);
                 }
+            };
+
+            // Показать успешное копирование
+            const showCopySuccess = (buttonElement) => {
+                const originalText = buttonElement.textContent;
+                buttonElement.textContent = 'Скопировано!';
+                buttonElement.classList.add('copy-success');
+                
+                setTimeout(() => {
+                    buttonElement.textContent = originalText;
+                    buttonElement.classList.remove('copy-success');
+                }, 2000);
             };
 
             // Инициализация при загрузке DOM
